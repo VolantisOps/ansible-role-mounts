@@ -1,0 +1,3 @@
+---
+- name: Expand root filesystem
+  command: resize2fs {{ mounts_autoresize_device_partition }}
