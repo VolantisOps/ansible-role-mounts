@@ -1,0 +1,17 @@
+---
+- name: Install admin tools
+  pacman: "name={{ item }} state=present"
+  with_items: "{{ mounts_admin_tools }}"
+
+- name: Create mount directories
+  file: "path={{ mounts_base }}/{{ item.name }} state=directory"
+  with_items: "{{ mounts }}"
+
+- name: Mount devices
+  mount:
+    path: "{{ mounts_base }}/{{ item.name }}"
+    src: "{{ item.src }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{% if item.opts %}{{ item.opts }}{% else %}defaults,noatime{% endif %}"
+    state: "{% if item.state %}{{ item.state }}{% else %}mounted{% endif %}"
+  with_items: "{{ mounts }}"

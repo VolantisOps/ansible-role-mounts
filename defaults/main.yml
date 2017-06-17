@@ -1,0 +1,11 @@
+---
+mounts: []
+mounts_admin_tools:
+  - btrfs-progs
+  - parted
+mounts_base: /mnt
+mounts: []
+#  - name: storage
+#    src: UUID=082cbb8c-3cb3-4d83-b39d-ce4302583a08
+#    fstype: btrfs
+#    state: mounted
