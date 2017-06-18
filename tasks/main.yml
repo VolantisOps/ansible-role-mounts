@@ -3,7 +3,6 @@
   pacman: "name={{ item }} state=present"
   with_items:
     - btrfs-progs
-    - parted
 
 - name: Create mount directories
   file: "path={{ mounts_base }}/{{ item.name }} state=directory"
@@ -17,15 +16,3 @@
     opts: "{% if item.opts %}{{ item.opts }}{% else %}defaults,noatime{% endif %}"
     state: "{% if item.state %}{{ item.state }}{% else %}mounted{% endif %}"
   with_items: "{{ mounts }}"
-
-- name: Assert root partition is expanded
-  assert: { that: item.mount != '/' or item.size_total > mounts_autoresize_minimum_size }
-  with_items: "{{ ansible_mounts }}"
-  ignore_errors: yes
-  register: mounts_root_expanded
-  when: mounts_autoresize_root
-
-- name: Expand root partition
-  command: "parted {{ mounts_autoresize_device }} resizepart {{ mounts_autoresize_partition_number }} 100%"
-  when: mounts_autoresize_root and mounts_root_expanded|failed
-  notify: Expand root filesystem

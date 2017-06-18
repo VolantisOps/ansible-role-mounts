@@ -6,8 +6,3 @@ mounts: []
 #    src: UUID=082cbb8c-3cb3-4d83-b39d-ce4302583a08
 #    fstype: btrfs
 #    state: mounted
-mounts_autoresize_root: false
-mounts_autoresize_device: /dev/mmcblk0
-mounts_autoresize_device_partition: /dev/mmcblk0p2
-mounts_autoresize_partition_number: 2
-mounts_autoresize_minimum_size: 3221225472 # 3 GB
