@@ -1,5 +1,4 @@
 ---
-mounts: []
 mounts_base: /mnt
 mounts: []
 #  - name: storage
